@@ -7,8 +7,8 @@ namespace Rusal.Interfaces.Filtration
 {
     public interface IPage<T> : IEnumerable<T>
     {
-        int PageIndex { get; set; }
-        int PageSize { get; set; }
-        int Pages { get; set; }
+        int PageIndex { get;  }
+        int PageSize { get;  }
+        int Pages { get;  }
     }
 }

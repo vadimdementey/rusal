@@ -76,7 +76,7 @@ namespace Rusal.Repository.Repositories
                 tasks = tasks.Where(x => x.Name.Contains(filter.SearchText) || x.Description.Contains(filter.SearchText));
             }
 
-            throw new NotImplementedException();
+            return new PageResult<ITask>(filter.PageIndex, filter.PageSize).ExecuteWith(tasks);
         }
 
         public IEnumerable<ITask> GetTasks(Guid employeeId, int maxCount)
@@ -105,13 +105,20 @@ namespace Rusal.Repository.Repositories
 
         public void RemoveTask(Guid taskId)
         {
-            TaskEntity task = Context.Set<TaskEntity>().AsNoTracking().FirstOrDefault(x => x.Id == taskId);
 
-            if (task != null)
+            var taskSet     = Context.Set<TaskEntity>().AsNoTracking();
+
+            TaskEntity task = taskSet.FirstOrDefault(x => x.Id == taskId);
+
+
+            if (task == null || taskSet.Any(x => x.ParentTaskId == taskId))
             {
-                Context.Set<TaskEntity>().Remove(task);
-                Context.SaveChanges();
+                return;
             }
+
+
+            Context.Set<TaskEntity>().Remove(task);
+            Context.SaveChanges();
 
         }
 

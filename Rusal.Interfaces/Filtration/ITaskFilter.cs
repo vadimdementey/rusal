@@ -13,5 +13,6 @@ namespace Rusal.Interfaces.Filtration
         string SearchText { get;  }   
 
         int PageIndex { get; }
+        int PageSize { get; }
     }
 }
