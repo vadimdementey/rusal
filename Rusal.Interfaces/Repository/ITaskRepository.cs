@@ -8,9 +8,12 @@ namespace Rusal.Interfaces.Repository
 {
     public interface ITaskRepository
     {
-        IEnumerable<Task> GetTasks(Guid employeeId, int maxCount);
-        IPage<Task> GetTasks(ITaskFilter filter);
-        ITask AddNewTask(Guid authorId, Guid employeeId, string name);
+        ITask GetTask(Guid taskId);
+        ITask GetTaskWithChilds(Guid taskId);
+        IEnumerable<ITask> GetTasks(Guid employeeId, int maxCount);
+        IPage<ITask> GetTasksByFilter(ITaskFilter filter);
+        ITask AddNewTask(Guid? parentTask , Guid authorId, Guid employeeId, string name);
         void UpdateTask(ITask task);
+        void RemoveTask(Guid taskId);
     }
 }

@@ -1308,6 +1308,17 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
+      "Rusal.Dto/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1",
+        "dependencies": {
+          "Rusal.Interfaces": "1.0.0"
+        }
+      },
+      "Rusal.Interfaces/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1"
+      },
       "System.Collections.Immutable/1.1.36": {
         "type": "package",
         "compile": {
@@ -2599,6 +2610,29 @@
         },
         "runtime": {
           "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Rusal.Dto/1.0.0": {
+        "type": "project",
+        "framework": "DNXCore,Version=v5.0",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23409",
+          "Rusal.Interfaces": "1.0.0",
+          "System.Collections": "4.0.11-beta-23409",
+          "System.Linq": "4.0.1-beta-23409",
+          "System.Runtime": "4.0.21-beta-23409",
+          "System.Threading": "4.0.11-beta-23409"
+        }
+      },
+      "Rusal.Interfaces/1.0.0": {
+        "type": "project",
+        "framework": "DNXCore,Version=v5.0",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23409",
+          "System.Collections": "4.0.11-beta-23409",
+          "System.Linq": "4.0.1-beta-23409",
+          "System.Runtime": "4.0.21-beta-23409",
+          "System.Threading": "4.0.11-beta-23409"
         }
       },
       "System.Collections/4.0.11-beta-23409": {
@@ -4759,6 +4793,17 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
+      "Rusal.Dto/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1",
+        "dependencies": {
+          "Rusal.Interfaces": "1.0.0"
+        }
+      },
+      "Rusal.Interfaces/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1"
+      },
       "System.Collections.Immutable/1.1.36": {
         "type": "package",
         "compile": {
@@ -6162,6 +6207,17 @@
         "runtime": {
           "lib/net45/Newtonsoft.Json.dll": {}
         }
+      },
+      "Rusal.Dto/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1",
+        "dependencies": {
+          "Rusal.Interfaces": "1.0.0"
+        }
+      },
+      "Rusal.Interfaces/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1"
       },
       "System.Collections.Immutable/1.1.36": {
         "type": "package",
@@ -7668,6 +7724,29 @@
         },
         "runtime": {
           "runtimes/win7/lib/DNXCore50/System.Threading.dll": {}
+        }
+      },
+      "Rusal.Dto/1.0.0": {
+        "type": "project",
+        "framework": "DNXCore,Version=v5.0",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23409",
+          "Rusal.Interfaces": "1.0.0",
+          "System.Collections": "4.0.11-beta-23409",
+          "System.Linq": "4.0.1-beta-23409",
+          "System.Runtime": "4.0.21-beta-23409",
+          "System.Threading": "4.0.11-beta-23409"
+        }
+      },
+      "Rusal.Interfaces/1.0.0": {
+        "type": "project",
+        "framework": "DNXCore,Version=v5.0",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23409",
+          "System.Collections": "4.0.11-beta-23409",
+          "System.Linq": "4.0.1-beta-23409",
+          "System.Runtime": "4.0.21-beta-23409",
+          "System.Threading": "4.0.11-beta-23409"
         }
       },
       "System.Collections/4.0.11-beta-23409": {
@@ -10092,6 +10171,29 @@
           "runtimes/win7/lib/DNXCore50/System.Threading.dll": {}
         }
       },
+      "Rusal.Dto/1.0.0": {
+        "type": "project",
+        "framework": "DNXCore,Version=v5.0",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23409",
+          "Rusal.Interfaces": "1.0.0",
+          "System.Collections": "4.0.11-beta-23409",
+          "System.Linq": "4.0.1-beta-23409",
+          "System.Runtime": "4.0.21-beta-23409",
+          "System.Threading": "4.0.11-beta-23409"
+        }
+      },
+      "Rusal.Interfaces/1.0.0": {
+        "type": "project",
+        "framework": "DNXCore,Version=v5.0",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23409",
+          "System.Collections": "4.0.11-beta-23409",
+          "System.Linq": "4.0.1-beta-23409",
+          "System.Runtime": "4.0.21-beta-23409",
+          "System.Threading": "4.0.11-beta-23409"
+        }
+      },
       "System.Collections/4.0.11-beta-23409": {
         "type": "package",
         "dependencies": {
@@ -11104,6 +11206,14 @@
     }
   },
   "libraries": {
+    "Rusal.Dto/1.0.0": {
+      "type": "project",
+      "path": "../../../Rusal.Dto/project.json"
+    },
+    "Rusal.Interfaces/1.0.0": {
+      "type": "project",
+      "path": "../../../Rusal.Interfaces/project.json"
+    },
     "Microsoft.AspNet.Antiforgery/1.0.0-beta8": {
       "type": "package",
       "serviceable": true,
@@ -15032,7 +15142,9 @@
       "Microsoft.AspNet.StaticFiles >= 1.0.0-beta8",
       "Microsoft.Framework.Logging >= 1.0.0-beta8",
       "Microsoft.Framework.Logging.Console >= 1.0.0-beta8",
-      "Microsoft.Framework.Logging.Debug >= 1.0.0-beta8"
+      "Microsoft.Framework.Logging.Debug >= 1.0.0-beta8",
+      "Rusal.Dto >= 1.0.0-*",
+      "Rusal.Interfaces >= 1.0.0-*"
     ],
     "DNX,Version=v4.5.1": [],
     "DNXCore,Version=v5.0": []

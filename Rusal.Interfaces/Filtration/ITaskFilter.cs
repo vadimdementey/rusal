@@ -7,9 +7,11 @@ namespace Rusal.Interfaces.Filtration
 {
     public interface ITaskFilter
     {
-        DateTime StartCreatedDate { get; set; }
-        DateTime EndCreatedDate   { get; set; }
-        int PriorityCode { get; set; }
-        string SearchText { get; set; }   
+        DateTime? StartCreatedDate { get;  }
+        DateTime? EndCreatedDate   { get;  }
+        int? PriorityCode { get;  }
+        string SearchText { get;  }   
+
+        int PageIndex { get; }
     }
 }

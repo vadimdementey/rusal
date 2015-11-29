@@ -13,5 +13,8 @@ namespace Rusal.Interfaces
         IPriority Priority { get; }
         string Description { get;  }
         bool Completed { get;  }
+
+        ITask     ParentTask { get; }
+        ITask[]   ChildTasks { get; }
     }
 }

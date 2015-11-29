@@ -5,12 +5,15 @@ using System.Threading.Tasks;
 
 namespace Rusal.Interfaces.Repository
 {
-    interface IUserRepository
+    public interface IUserRepository
     {
 
         IEnumerable<IUser> GetUsers();
-        IUser Login(string userName, Guid password);
+        IUser Login(string userName, string password);
         void UpdateUser(IUser user);
-        IUser RegisterUser(string userName, Guid password);
+        IUser RegisterUser(string userName, string password);
+        IUser SetPassword(Guid userId, string newPassword);
+
+        void RemoveUser(Guid userId);
     }
 }
