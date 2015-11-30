@@ -11,18 +11,30 @@ using Rusal.Repository;
 using WebApp.Security;
 using Rusal.Interfaces;
 using Microsoft.AspNet.StaticFiles;
+using Microsoft.Framework.Configuration;
+using Microsoft.Dnx.Runtime;
 
 namespace WebApp
 {
     public class Startup
     {
 
-        public IRepositoryFactory factory;
 
-        public Startup(IHostingEnvironment env)
+
+        public IConfigurationRoot Configuration { get; set; }
+
+
+        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
         {
 
-            factory = new RepositoryFactory("Data Source =.; Initial Catalog = rusal_tasks_db; User ID = sa; Password = 1");
+
+            Configuration = new ConfigurationBuilder()
+               .SetBasePath(appEnv.ApplicationBasePath)
+               .AddJsonFile("appsettings.json")
+               .AddEnvironmentVariables()
+               .Build();
+
+
 
         }
 
@@ -30,7 +42,7 @@ namespace WebApp
         // Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton(x => factory);
+            services.AddSingleton<IRepositoryFactory>(x => new RepositoryFactory(Configuration["Data:DefaultConnection:ConnectionString"]));
             services.AddScoped   (x => x.GetRequiredService<IRepositoryFactory>().CreateRepository<IUserRepository>());
             services.AddScoped   (x => x.GetRequiredService<IRepositoryFactory>().CreateRepository<ITaskRepository>());
 
