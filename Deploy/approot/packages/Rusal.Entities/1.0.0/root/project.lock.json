@@ -1,0 +1,84 @@
+{
+  "locked": false,
+  "version": 2,
+  "targets": {
+    "DNX,Version=v4.5.1": {
+      "Rusal.Entities/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Rusal.Interfaces": "1.0.0"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Rusal.Entities.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Rusal.Entities.dll": {}
+        }
+      },
+      "Rusal.Interfaces/1.0.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Rusal.Interfaces.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Rusal.Interfaces.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Rusal.Entities/1.0.0": {
+      "type": "package",
+      "sha512": "m374tHK01p/rmfAlUrgYTsAQh3XSat/ZJph8mL+yXzDKz9ZD8NFEbEI+054IZoi3v7XfPrRNVL1IBiQWvbmHHA==",
+      "files": [
+        "lib/dnx451/Rusal.Entities.dll",
+        "lib/dnx451/Rusal.Entities.xml",
+        "root/project.json",
+        "root/project.lock.json",
+        "root/Rusal.Entities.xproj.user",
+        "Rusal.Entities.1.0.0.nupkg",
+        "Rusal.Entities.1.0.0.nupkg.sha512",
+        "Rusal.Entities.nuspec"
+      ]
+    },
+    "Rusal.Interfaces/1.0.0": {
+      "type": "package",
+      "sha512": "BpDhQem/cKGrfDjRI0oTQCehFdq6jqLf8FDbQ0hltFGYkRzjUzeOs5BvoiuoO7FACLze2VG0gZQ7Fg/LKObUlw==",
+      "files": [
+        "lib/dnx451/Rusal.Interfaces.dll",
+        "lib/dnx451/Rusal.Interfaces.xml",
+        "root/project.json",
+        "root/project.lock.json",
+        "root/Rusal.Interfaces.xproj.user",
+        "Rusal.Interfaces.1.0.0.nupkg",
+        "Rusal.Interfaces.1.0.0.nupkg.sha512",
+        "Rusal.Interfaces.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "": [
+      "Rusal.Entities >= 1.0.0"
+    ],
+    "DNX,Version=v4.5.1": [],
+    "DNXCore,Version=v5.0": [
+      "Microsoft.CSharp >= 4.0.1-beta-23409",
+      "System.Collections >= 4.0.11-beta-23409",
+      "System.Linq >= 4.0.1-beta-23409",
+      "System.Runtime >= 4.0.21-beta-23409",
+      "System.Threading >= 4.0.11-beta-23409"
+    ]
+  }
+}

@@ -1,0 +1,526 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+
+    <script src="/js/httpClient.js"></script>
+    <script src="/js/restClient.js"></script>
+
+</head>
+<body>
+   
+    <nav class="navbar navbar-dark bg-inverse">
+        <span >Пользователь: <label id="loggedUser">Not Logged</label></span>
+        <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#toDo">Мои задачи</button>
+        &nbsp;
+        &nbsp;
+        <button type="button" class="btn btn-primary" style="float:right" data-toggle="modal" data-target="#newTask">Нов. задача</button>
+    </nav>
+  
+    <div class="container">
+        
+        
+        <br/>
+
+        <form class="form-inline">
+            
+            <div class="form-group">
+                <label for="StartCreatedDate">Дата от:</label>
+                <input type="date" class="form-control" id="filter-StartCreatedDate" placeholder="Введите дату">
+            </div>
+
+            <div class="form-group">
+                <label for="EndCreatedDate">до:</label>
+                <input type="date" class="form-control" id="filter-EndCreatedDate" placeholder="Введите дату">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail2">Приоритет:</label>
+                <select class="form-control" id="filter-PriorityCode"></select>
+            </div>
+
+            <div class="form-group">
+                <label for="EndCreatedDate">Текст:</label>
+                <input type="text" class="form-control" id="filter-SearchText" placeholder="Произвольный текст">
+            </div>
+
+
+            <button type="submit" class="btn btn-primary" onclick="return applyFilter()">Поиск</button>
+        </form>
+
+
+        <br/>
+        <table class="table" id="table-view-tasks">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Дата</th>
+                    <th>Автор</th>
+                    <th>Задача</th>
+                    <th>Исполнитель</th>
+                    <th>Приоритет</th>
+                    <th>Статус</th>
+                    <th>Описание</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+               
+               
+            </tbody>
+        </table>
+
+        <nav>
+            <ul class="pager" id="page-navigator" >
+                <li class="previous" id="page-navigator-prior"><a href="#" onclick="return applyFilter(document.pageIndex-1)"><span aria-hidden="true">&larr;</span>Предыдущая страница</a></li>
+                <li class="next"  id="page-navigator-next"><a href="#"   onclick="return applyFilter(document.pageIndex + 1)">Следующая страница<span aria-hidden="true">&rarr;</span></a></li>
+            </ul>
+        </nav>
+
+
+
+
+    </div>
+
+ 
+ 
+    <div class="modal fade" id="newTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Создать новую задачу</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">Исполнитель:</label>
+                      
+                            <select class="form-control" id="new-task-employee">
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">Приоритет:</label>
+
+                            <select class="form-control" id="new-task-priority"></select>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="new-task-name" class="control-label">Задача:</label>
+                            <textarea class="form-control" id="new-task-name"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="newTask();">Создать</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Редактировать задачу</h4><span id="edit-task-status">Не определено</span>
+                </div>
+                <div class="modal-body">
+                    <form>
+                      
+                        <input type="hidden" id="edit-task-id"/>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">Дата:</label>
+                            <input class="form-control" readonly="readonly" id="edit-task-date">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">Автор:</label>
+                            <input class="form-control" readonly="readonly" id="edit-task-author">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">Задача:</label>
+                            <input class="form-control" id="edit-task-name">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">Исполнитель:</label>
+                            <input class="form-control" readonly="readonly" id="edit-task-employee">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">Приоритет:</label>
+                            <select class="form-control" id="edit-task-priority"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="new-task-name" class="control-label">Описание:</label>
+                            <textarea class="form-control" id="edit-task-description"></textarea>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="updateTask();">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="toDo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Мои задачи</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <table class="table" id="table-todo-tasks">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>Дата</th>
+                                    <th>Автор</th>
+                                    <th>Задача</th>
+                                    <th>Приоритет</th>
+                                    <th>Описание</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" >Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+
+
+        function applyFilter(pageIndex)
+        {
+
+
+            if (!pageIndex)
+            {
+                pageIndex = 0;
+                
+            }
+
+            var filter = { PageIndex: pageIndex, PageSize: 10 };
+
+
+            filter.StartCreatedDate = $("#filter-StartCreatedDate").val();
+            filter.EndCreatedDate   = $("#filter-EndCreatedDate").val();
+          
+            filter.PriorityCode = $("#filter-PriorityCode option:selected").val();
+            filter.SearchText  =  $("#filter-SearchText").val(); 
+
+
+            new restClient("/tasks").POST(filter, function (pageResult)
+            {
+
+
+                if (pageResult.Pages > 1)
+                {
+                    $("#page-navigator").css("display","");
+                }
+                else
+                {
+                    $("#page-navigator").css("display","none");
+                }
+
+
+                if (pageResult.PageIndex)
+                {
+                    $("#page-navigator-prior").removeClass("disabled");
+                }
+                else
+                {
+                    $("#page-navigator-prior").addClass("disabled");
+                }
+
+
+                if ( ( pageResult.Pages -pageResult.PageIndex)>1 )
+                {
+                    $("#page-navigator-next").removeClass("disabled");
+                }
+                else
+                {
+                    $("#page-navigator-next").addClass("disabled");
+                }
+
+                document.pageIndex = pageResult.PageIndex;
+
+            
+                $("#table-view-tasks tbody").remove();
+
+
+                $.each(pageResult.DataSet, function (i, x)
+                {
+                    $("#table-view-tasks").append(newTableRow(x));
+                });
+
+
+            });
+
+
+            return false;
+        }
+
+
+        function newTask()
+        {
+            var dataSet = { Employee: $("#new-task-employee option:selected").val(),Priority:$("#new-task-priority option:selected").val(), Name: $("#new-task-name").val() };
+
+            new restClient("/tasks/new").PUT(dataSet, function (x)
+            {
+                $("#table-view-tasks").append(newTableRow(x));
+            });
+        }
+
+
+        function updateTask()
+        {
+            var dataSet = {Id: $("#edit-task-id").val(), Name: $("#edit-task-name").val(), Priority: { Code: $("#edit-task-priority option:selected").val() }, Description: $("#edit-task-description").val() };
+
+            new restClient("/tasks").PUT(dataSet, function (task)
+            {
+                $("#" + task.Id).html(newTableRow(task).html());
+            });
+
+        }
+
+
+
+        function removeTask($this)
+        {
+            if (confirm("Удалить задачу ?"))
+            {
+                $($this).parents("tr").each(function (i, x)
+                {
+                    new restClient("/tasks/" + x.id).DELETE(function (obj)
+                    {
+                        $(x).remove();
+                    });
+                });
+            }
+        }
+
+        function completeTask($this)
+        {
+            if (confirm("Завершить задачу ?"))
+            {
+                $($this).parents("tr").each(function (i, x)
+                {
+                    new restClient("/tasks/complete/" + x.id).PUT({}, function (obj)
+                    {
+                        $(x).html(newTableRow(obj).html());
+                    });
+                });
+            }
+        }
+
+
+        function newToDoRow(x)
+        {
+            var $tableRow = $("<tr id='_" + x.Id + "'></tr>");
+
+            $tableRow.append($("<th scope='row'></th>").html(x.CreatedDateTime));
+            $tableRow.append($("<td></td>").html(x.Author.Name));
+            $tableRow.append($("<td></td>").html(x.Name));
+            $tableRow.append($("<td></td>").html(x.Priority.Name));
+            $tableRow.append($("<td></td>").html(x.Description));
+
+            return $tableRow;
+        }
+
+
+        function newTableRow(x)
+        {
+            var $tableRow = $("<tr id='"+x.Id+"'></tr>");
+
+
+            $tableRow.append($("<th scope='row'></th>").html(x.CreatedDateTime));
+            $tableRow.append($("<td></td>").html(x.Author.Name));
+            $tableRow.append($("<td></td>").html(x.Name));
+            $tableRow.append($("<td></td>").html(x.ToEmployee.Name));
+            $tableRow.append($("<td></td>").html(x.Priority.Name));
+
+
+            if (x.Completed)
+            {
+                $tableRow.append($("<td style='color:green'></td>").html("Завершено"));
+            }
+            else
+            {
+                $tableRow.append($("<td style='color:red'></td>").html("В работе"));
+            }
+
+           
+
+            
+
+            $tableRow.append($("<td></td>").html(x.Description));
+
+            if (x.Completed)
+            {
+                $tableRow.append($("<td align='right'></td>").html("<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#editTask'>Ред.</button>&nbsp;<button type='button' class='btn btn-danger' onclick='removeTask(this)'>Уд.</button>"));
+            }
+            else
+            {
+                $tableRow.append($("<td align='right'></td>").html("<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#editTask'>Ред.</button>&nbsp;<button type='button' class='btn btn-success' onclick='completeTask(this)'>Зав.</button>"));
+            }
+
+
+
+            return $tableRow;
+        }
+
+
+        $('#toDo').on('show.bs.modal', function (event)
+        {
+            new restClient("/tasks/todo").GET(function (dataSet)
+            {
+
+                $("#table-todo-tasks tbody").remove();
+
+
+                $.each(dataSet, function (i, x)
+                {
+                    $("#table-todo-tasks").append(newToDoRow(x));
+                });
+            });
+        })
+
+
+
+
+
+
+
+        $('#editTask').on('show.bs.modal', function (event)
+        {
+            $(event.relatedTarget).parents("tr").each(function (i, x)
+            {
+
+
+                new restClient("/tasks/" + x.id).GET(function (task)
+                {
+
+                    $("#edit-task-id").val(task.Id);
+
+                    $("#edit-task-date"  ).val(task.CreatedDateTime);
+                    $("#edit-task-author").val(task.Author.Name);
+                    $("#edit-task-name").val(task.Name);
+                    $("#edit-task-employee").val(task.ToEmployee.Name);
+
+                    $("#edit-task-priority option")
+                         .prop  ('selected', false)
+                         .filter("[value='" + task.Priority.Code + "']")
+                         .prop  ('selected', true);
+
+                    $("#edit-task-description").val(task.Description);
+
+                    if (task.Completed)
+                    {
+                      $("#edit-task-status").html("<span style='color:green'>Завершено</span>");
+                    }
+                    else
+                    {
+                      $("#edit-task-status").html("<span style='color:red'>В работе</span>");
+                    }
+
+                });
+            
+            });
+        })
+
+
+
+
+        $(document).ready(function ()
+        {
+            
+
+            new restClient("/users/logged").GET(function (x)
+            {
+                $("#loggedUser").text(x.Name);
+            });
+
+
+             new restClient("/tasks/priority").GET(function (dataSet)
+            {
+                $.each(dataSet,function(i,x)
+                {
+                    $("#new-task-priority").append($("<option></option>").val(x.Code).text(x.Name));
+                });
+
+                 $.each(dataSet,function(i,x)
+                {
+                    $("#edit-task-priority").append($("<option></option>").val(x.Code).text(x.Name));
+                });
+
+
+                $("#filter-PriorityCode").append($("<option></option>").val("").text("-Приоритет-"))
+
+                $.each(dataSet, function (i, x)
+                {
+                    $("#filter-PriorityCode").append($("<option></option>").val(x.Code).text(x.Name));
+                });
+
+            });
+
+
+            new restClient("/users").GET(function (dataSet)
+            {
+
+                $.each(dataSet,function(i,x)
+                {
+                    $("#new-task-employee").append($("<option></option>").val(x.Id).text(x.Name));
+                });
+
+            
+
+            });
+
+
+            applyFilter();
+
+
+        });
+
+        </script>
+
+</body>
+
+
+    
+
+
+</html>
+
+

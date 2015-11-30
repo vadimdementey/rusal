@@ -1,0 +1,52 @@
+{
+  "locked": false,
+  "version": 2,
+  "targets": {
+    "DNX,Version=v4.5.1": {
+      "Rusal.Interfaces/1.0.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Rusal.Interfaces.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Rusal.Interfaces.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Rusal.Interfaces/1.0.0": {
+      "type": "package",
+      "sha512": "BpDhQem/cKGrfDjRI0oTQCehFdq6jqLf8FDbQ0hltFGYkRzjUzeOs5BvoiuoO7FACLze2VG0gZQ7Fg/LKObUlw==",
+      "files": [
+        "lib/dnx451/Rusal.Interfaces.dll",
+        "lib/dnx451/Rusal.Interfaces.xml",
+        "root/project.json",
+        "root/project.lock.json",
+        "root/Rusal.Interfaces.xproj.user",
+        "Rusal.Interfaces.1.0.0.nupkg",
+        "Rusal.Interfaces.1.0.0.nupkg.sha512",
+        "Rusal.Interfaces.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "": [
+      "Rusal.Interfaces >= 1.0.0"
+    ],
+    "DNX,Version=v4.5.1": [],
+    "DNXCore,Version=v5.0": [
+      "Microsoft.CSharp >= 4.0.1-beta-23409",
+      "System.Collections >= 4.0.11-beta-23409",
+      "System.Linq >= 4.0.1-beta-23409",
+      "System.Runtime >= 4.0.21-beta-23409",
+      "System.Threading >= 4.0.11-beta-23409"
+    ]
+  }
+}

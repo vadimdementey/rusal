@@ -1,0 +1,154 @@
+{
+  "locked": false,
+  "version": 2,
+  "targets": {
+    "DNX,Version=v4.5.1": {
+      "EntityFramework/6.1.2": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.ComponentModel.DataAnnotations"
+        ],
+        "compile": {
+          "lib/net45/EntityFramework.dll": {},
+          "lib/net45/EntityFramework.SqlServer.dll": {}
+        },
+        "runtime": {
+          "lib/net45/EntityFramework.dll": {},
+          "lib/net45/EntityFramework.SqlServer.dll": {}
+        }
+      },
+      "Rusal.Entities/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Rusal.Interfaces": "1.0.0"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Rusal.Entities.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Rusal.Entities.dll": {}
+        }
+      },
+      "Rusal.Interfaces/1.0.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Rusal.Interfaces.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Rusal.Interfaces.dll": {}
+        }
+      },
+      "Rusal.Repository/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "EntityFramework": "6.1.2",
+          "Rusal.Entities": "1.0.0",
+          "Rusal.Interfaces": "1.0.0"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Rusal.Repository.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Rusal.Repository.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "EntityFramework/6.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "tMYDJsgf19mFkwu1Dp3e681IggYcnuLJrj+OoQtYJ7L8lOD0OprBRyLy9sTTY4leJ2216HU3yFQucEPPKd1BGw==",
+      "files": [
+        "content/App.config.transform",
+        "content/Web.config.transform",
+        "EntityFramework.6.1.2.nupkg",
+        "EntityFramework.6.1.2.nupkg.sha512",
+        "EntityFramework.nuspec",
+        "lib/net40/EntityFramework.dll",
+        "lib/net40/EntityFramework.SqlServer.dll",
+        "lib/net40/EntityFramework.SqlServer.xml",
+        "lib/net40/EntityFramework.xml",
+        "lib/net45/EntityFramework.dll",
+        "lib/net45/EntityFramework.SqlServer.dll",
+        "lib/net45/EntityFramework.SqlServer.xml",
+        "lib/net45/EntityFramework.xml",
+        "tools/about_EntityFramework.help.txt",
+        "tools/EntityFramework.PowerShell.dll",
+        "tools/EntityFramework.PowerShell.Utility.dll",
+        "tools/EntityFramework.psd1",
+        "tools/EntityFramework.psm1",
+        "tools/init.ps1",
+        "tools/install.ps1",
+        "tools/migrate.exe"
+      ]
+    },
+    "Rusal.Entities/1.0.0": {
+      "type": "package",
+      "sha512": "m374tHK01p/rmfAlUrgYTsAQh3XSat/ZJph8mL+yXzDKz9ZD8NFEbEI+054IZoi3v7XfPrRNVL1IBiQWvbmHHA==",
+      "files": [
+        "lib/dnx451/Rusal.Entities.dll",
+        "lib/dnx451/Rusal.Entities.xml",
+        "root/project.json",
+        "root/project.lock.json",
+        "root/Rusal.Entities.xproj.user",
+        "Rusal.Entities.1.0.0.nupkg",
+        "Rusal.Entities.1.0.0.nupkg.sha512",
+        "Rusal.Entities.nuspec"
+      ]
+    },
+    "Rusal.Interfaces/1.0.0": {
+      "type": "package",
+      "sha512": "BpDhQem/cKGrfDjRI0oTQCehFdq6jqLf8FDbQ0hltFGYkRzjUzeOs5BvoiuoO7FACLze2VG0gZQ7Fg/LKObUlw==",
+      "files": [
+        "lib/dnx451/Rusal.Interfaces.dll",
+        "lib/dnx451/Rusal.Interfaces.xml",
+        "root/project.json",
+        "root/project.lock.json",
+        "root/Rusal.Interfaces.xproj.user",
+        "Rusal.Interfaces.1.0.0.nupkg",
+        "Rusal.Interfaces.1.0.0.nupkg.sha512",
+        "Rusal.Interfaces.nuspec"
+      ]
+    },
+    "Rusal.Repository/1.0.0": {
+      "type": "package",
+      "sha512": "yhwqDeMoRoV/R/FvCLkU6hrdn5el0KvAfZb8dBU09UXxoNIeKIATY4dL+XoxsRlduQ2vNBz0PK5Z+hn2lAOTNw==",
+      "files": [
+        "lib/dnx451/Rusal.Repository.dll",
+        "lib/dnx451/Rusal.Repository.xml",
+        "root/DataBase.sql",
+        "root/project.json",
+        "root/project.lock.json",
+        "root/Rusal.Repository.xproj.user",
+        "Rusal.Repository.1.0.0.nupkg",
+        "Rusal.Repository.1.0.0.nupkg.sha512",
+        "Rusal.Repository.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "": [
+      "Rusal.Repository >= 1.0.0"
+    ],
+    "DNX,Version=v4.5.1": []
+  }
+}

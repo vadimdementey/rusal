@@ -1,0 +1,27 @@
+{
+  "webroot": "../../../../../wwwroot",
+  "version": "1.0.0-*",
+  "dependencies": {
+    "WebApp": "1.0.0"
+  },
+  "commands": {
+    "web": "Microsoft.AspNet.Server.Kestrel"
+  },
+  "frameworks": {
+    "dnx451": {
+      "dependencies": {
+        "Rusal.Repository": "1.0.0-*"
+      }
+    }
+  },
+  "exclude": [
+    "wwwroot",
+    "node_modules"
+  ],
+  "publishExclude": [
+    "**.user",
+    "**.vspscc"
+  ],
+  "entryPoint": "WebApp",
+  "loadable": false
+}

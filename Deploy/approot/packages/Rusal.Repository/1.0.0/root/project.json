@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0-*",
+  "description": "Rusal.Repository Class Library",
+  "authors": [
+    "Vadim"
+  ],
+  "tags": [
+    ""
+  ],
+  "projectUrl": "",
+  "licenseUrl": "",
+  "frameworks": {
+    "dnx451": {}
+  },
+  "dependencies": {
+    "Rusal.Repository": "1.0.0"
+  },
+  "entryPoint": "Rusal.Repository",
+  "loadable": false
+}
