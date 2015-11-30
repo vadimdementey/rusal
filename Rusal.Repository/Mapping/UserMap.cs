@@ -11,7 +11,7 @@ namespace Rusal.Repository.Mapping
     {
         public UserMap()
         {
-            ToTable("Users");
+            ToTable("UserAccounts");
             HasKey(x => x.Id);
             Property(x => x.Id).HasColumnName("UserId");
             Property(x => x.Name     ).HasMaxLength(50).HasColumnName("UserName");

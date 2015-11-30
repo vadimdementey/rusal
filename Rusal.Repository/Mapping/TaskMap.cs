@@ -19,10 +19,12 @@ namespace Rusal.Repository.Mapping
             Property(x => x.CreatedDateTime).HasColumnName("TaskCreatedDateTime");
             Property(x => x.AuthorId).HasColumnName("AuthorId");
             Property(x => x.EmployeeId).HasColumnName("EmployeeId");
-
+            Property(x => x.PriorityCode).HasColumnName("TaskPriorityCode");
             Property(x => x.Completed).HasColumnName("TaskCompleted");
             Property(x => x.Description).HasMaxLength(100).HasColumnName("TaskDescription");
 
+         //   HasOptional(x => x.ParentTask).WithMany().HasForeignKey(x => x.ParentTaskId);
+            HasRequired(x => x.Priority  ).WithMany().HasForeignKey(x => x.PriorityCode);
             HasRequired(x => x.Author    ).WithMany().HasForeignKey(x => x.AuthorId);
             HasRequired(x => x.ToEmployee).WithMany().HasForeignKey(x => x.EmployeeId);
 

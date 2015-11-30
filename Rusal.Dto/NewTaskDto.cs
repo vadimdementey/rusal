@@ -9,6 +9,7 @@ namespace Rusal.Dto
     {
         public Guid? Task { get; set; }
         public Guid Employee { get; set; }
+        public int Priority { get; set; }
         public string Name { get; set; }
     }
 }

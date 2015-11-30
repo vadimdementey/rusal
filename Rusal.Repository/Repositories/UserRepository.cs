@@ -27,36 +27,45 @@ namespace Rusal.Repository.Repositories
         public IEnumerable<IUser> GetUsers()
         {
             return Context.Set<UserEntity>()
+                          .OrderBy(x=>x.Name)
                           .ToArray();
         }
 
-        public IUser Login(string userName, string password)
+        public IAccount Login(string userName, string password)
         {
             Guid passwordHash = ComputeHash(password);
             return Context.Set<UserEntity>().FirstOrDefault(x => x.LoginName == userName && x.Password == passwordHash);
 
         }
 
-        public IUser RegisterUser(string userName, string password)
+        public IAccount RegisterUser(string userName, string password)
         {
 
-            UserEntity user = CreateNew<UserEntity>();
+            Guid passwordHash = ComputeHash(password);
 
-            user.Name      = userName;
-            user.LoginName = userName;
-            user.Password  = ComputeHash(password);
-
-            if (Context.Set<UserEntity>().Any(x => x.Password == user.Password || x.LoginName == user.LoginName))
+            if (Context.Set<UserEntity>().Any(x => x.Password == passwordHash || x.LoginName == userName))
             {
                 throw new Exception("User exists !");
             }
+
+
+
+            UserEntity user = CreateNew<UserEntity>();
+
+            user.Id = Guid.NewGuid();
+
+            user.Name      = userName;
+            user.LoginName = userName;
+            user.Password  = passwordHash;
+
+            
 
             Context.SaveChanges();
             return user;
 
         }
 
-        public IUser SetPassword(Guid userId, string newPassword)
+        public IAccount SetPassword(Guid userId, string newPassword)
         {
             UserEntity user = Context.Set<UserEntity>().FirstOrDefault(x => x.Id == userId);
 

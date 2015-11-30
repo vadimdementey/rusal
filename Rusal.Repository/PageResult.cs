@@ -21,7 +21,7 @@ namespace Rusal.Repository
         internal PageResult(int pageIndex, int pageSize)
         {
             PageIndex = pageIndex;
-            PageSize  = pageSize;
+            PageSize  = pageSize<1?10:pageSize;
         }
 
 

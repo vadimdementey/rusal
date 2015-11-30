@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E191DE2F-9FDA-4451-8D2E-39BA33520F49}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AE1AD740-D57F-4F15-AF39-A1611F766272}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+		NuGet.Config = NuGet.Config
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApp", "src\WebApp\WebApp.xproj", "{BB62E9D9-0B02-432D-AF40-2883E036219E}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rusal.Interfaces", "..\Rusal.Interfaces\Rusal.Interfaces.xproj", "{CFF16482-7C95-4F58-9DFF-4702770D6B2A}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rusal.Entities", "..\Rusal.Entities\Rusal.Entities.xproj", "{77CB90F2-510C-4B33-9320-600AACF810AF}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rusal.Dto", "..\Rusal.Dto\Rusal.Dto.xproj", "{E08E99A5-1036-4AAD-8541-EF5442C44064}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rusal.Repository", "..\Rusal.Repository\Rusal.Repository.xproj", "{27912DFE-0F6A-4FBF-9091-2F90BEE76CB2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB62E9D9-0B02-432D-AF40-2883E036219E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB62E9D9-0B02-432D-AF40-2883E036219E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB62E9D9-0B02-432D-AF40-2883E036219E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB62E9D9-0B02-432D-AF40-2883E036219E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFF16482-7C95-4F58-9DFF-4702770D6B2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFF16482-7C95-4F58-9DFF-4702770D6B2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFF16482-7C95-4F58-9DFF-4702770D6B2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFF16482-7C95-4F58-9DFF-4702770D6B2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77CB90F2-510C-4B33-9320-600AACF810AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77CB90F2-510C-4B33-9320-600AACF810AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77CB90F2-510C-4B33-9320-600AACF810AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77CB90F2-510C-4B33-9320-600AACF810AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E08E99A5-1036-4AAD-8541-EF5442C44064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E08E99A5-1036-4AAD-8541-EF5442C44064}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E08E99A5-1036-4AAD-8541-EF5442C44064}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E08E99A5-1036-4AAD-8541-EF5442C44064}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27912DFE-0F6A-4FBF-9091-2F90BEE76CB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27912DFE-0F6A-4FBF-9091-2F90BEE76CB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27912DFE-0F6A-4FBF-9091-2F90BEE76CB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27912DFE-0F6A-4FBF-9091-2F90BEE76CB2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BB62E9D9-0B02-432D-AF40-2883E036219E} = {E191DE2F-9FDA-4451-8D2E-39BA33520F49}
+		{CFF16482-7C95-4F58-9DFF-4702770D6B2A} = {E191DE2F-9FDA-4451-8D2E-39BA33520F49}
+		{77CB90F2-510C-4B33-9320-600AACF810AF} = {E191DE2F-9FDA-4451-8D2E-39BA33520F49}
+		{E08E99A5-1036-4AAD-8541-EF5442C44064} = {E191DE2F-9FDA-4451-8D2E-39BA33520F49}
+		{27912DFE-0F6A-4FBF-9091-2F90BEE76CB2} = {E191DE2F-9FDA-4451-8D2E-39BA33520F49}
+	EndGlobalSection
+EndGlobal

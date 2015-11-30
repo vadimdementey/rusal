@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Rusal.Entities
 {
-    public class UserEntity : NamedEntity,IUser
+    public class UserEntity : NamedEntity,IAccount
     {
     
         public string LoginName { get; set; }

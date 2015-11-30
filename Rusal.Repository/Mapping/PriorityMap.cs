@@ -11,7 +11,7 @@ namespace Rusal.Repository.Mapping
     {
         public PriorityMap()
         {
-            ToTable("Priorities");
+            ToTable("TaskPriorities");
             HasKey(x => x.Code);
             Property(x => x.Code).HasColumnName("Code");
             Property(x => x.Name).HasMaxLength(50).HasColumnName("Name");

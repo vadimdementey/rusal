@@ -9,10 +9,10 @@ namespace Rusal.Interfaces.Repository
     {
 
         IEnumerable<IUser> GetUsers();
-        IUser Login(string userName, string password);
+        IAccount Login(string userName, string password);
         void UpdateUser(IUser user);
-        IUser RegisterUser(string userName, string password);
-        IUser SetPassword(Guid userId, string newPassword);
+        IAccount RegisterUser(string userName, string password);
+        IAccount SetPassword(Guid userId, string newPassword);
 
         void RemoveUser(Guid userId);
     }

@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+
+    <script src="/js/httpClient.js"></script>
+    <script src="/js/restClient.js"></script>
+
+</head>
+<body>
+   
+    <nav class="navbar navbar-dark bg-inverse">
+        <span >Пользователь: <label id="loggedUser">Not Logged</label></span>
+        <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#newTask">Мои задачи</button>
+        &nbsp;
+        &nbsp;
+        <button type="button" class="btn btn-primary" style="float:right" data-toggle="modal" data-target="#newTask">Нов. задача</button>
+    </nav>
+  
+    <div class="container">
+        
+        
+        <br/>
+
+        <form class="form-inline">
+            
+            <div class="form-group">
+                <label for="StartCreatedDate">Дата от:</label>
+                <input type="date" class="form-control" id="filter-StartCreatedDate" placeholder="Введите дату">
+            </div>
+
+            <div class="form-group">
+                <label for="EndCreatedDate">до:</label>
+                <input type="date" class="form-control" id="filter-EndCreatedDate" placeholder="Введите дату">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail2">Приоритет:</label>
+                <select class="form-control" id="filter-PriorityCode"></select>
+            </div>
+
+            <div class="form-group">
+                <label for="EndCreatedDate">Текст:</label>
+                <input type="date" class="form-control" id="filter-SearchText" placeholder="Произвольный текст">
+            </div>
+
+
+            <button type="submit" class="btn btn-primary" onclick="return applyFilter()">Поиск</button>
+        </form>
+
+
+        <br/>
+        <table class="table" id="table-view-tasks">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Дата</th>
+                    <th>Автор</th>
+                    <th>Задача</th>
+                    <th>Исполнитель</th>
+                    <th>Приоритет</th>
+                    <th>Статус</th>
+                    <th>Описание</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+               
+               
+            </tbody>
+        </table>
+
+        <nav>
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+
+    <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+    <button type="button" class="btn btn-primary">Primary</button>
+    <!-- Secondary, outline button -->
+    <button type="button" class="btn btn-secondary">Secondary</button>
+    <!-- Indicates a successful or positive action -->
+    <button type="button" class="btn btn-success">Success</button>
+    <!-- Indicates caution should be taken with this action -->
+    <button type="button" class="btn btn-warning">Warning</button>
+    <!-- Indicates a dangerous or potentially negative action -->
+    <button type="button" class="btn btn-danger">Danger</button>
+    <!-- Deemphasize a button by making it look like a link while maintaining button behavior -->
+    <button type="button" class="btn btn-link">Link</button>
+
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Open modal for @fat</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
+    ...more buttons...
+
+    <div class="modal fade" id="newTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Создать новую задачу</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">Исполнитель:</label>
+                      
+                            <select class="form-control" id="new-task-employee">
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">Приоритет:</label>
+
+                            <select class="form-control" id="new-task-priority"></select>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="new-task-name" class="control-label">Задача:</label>
+                            <textarea class="form-control" id="new-task-name"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="newTask();">Создать</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+
+        function applyFilter()
+        {
+
+            var filter = { PageIndex: 0, PageSize: 10 };
+
+
+            filter.StartCreatedDate = $("#filter-StartCreatedDate").val();
+            filter.EndCreatedDate   = $("#filter-EndCreatedDate").val();
+          
+            filter.PriorityCode = $("#filter-PriorityCode option:selected").val();
+            filter.SearchText  =  $("#filter-SearchText").val(); 
+
+
+            new restClient("/tasks").POST(filter, function (dataSet)
+            {
+            
+                $("#table-view-tasks tbody").remove();
+
+
+                $.each(dataSet,function(i,x)
+                {
+                    $("#table-view-tasks").append(newTableRow(x));
+                });
+
+            });
+
+
+            return false;
+        }
+
+
+        function newTask()
+        {
+            var dataSet = { Employee: $("#new-task-employee option:selected").val(),Priority:$("#new-task-priority option:selected").val(), Name: $("#new-task-name").val() };
+
+            new restClient("/tasks/new").PUT(dataSet, function (x)
+            {
+                $("#table-view-tasks").append(newTableRow(x));
+            });
+        }
+
+
+
+        function removeTask($this)
+        {
+            if (confirm("Удалить задачу ?"))
+            {
+                $($this).parents("tr").each(function (i, x)
+                {
+                    new restClient("/tasks/" + x.id).DELETE(function (obj)
+                    {
+                        $(x).remove();
+                    });
+                });
+            }
+        }
+
+        function completeTask($this)
+        {
+            if (confirm("Завершить задачу ?"))
+            {
+                $($this).parents("tr").each(function (i, x)
+                {
+                    new restClient("/tasks/complete/" + x.id).PUT({}, function (obj)
+                    {
+                        $(x).html(newTableRow(obj).html());
+                    });
+                });
+            }
+        }
+
+
+        function newTableRow(x)
+        {
+            var $tableRow = $("<tr id='"+x.Id+"'></tr>");
+
+
+            $tableRow.append($("<th scope='row'></th>").html(x.CreatedDateTime));
+            $tableRow.append($("<td></td>").html(x.Author.Name));
+            $tableRow.append($("<td></td>").html(x.Name));
+            $tableRow.append($("<td></td>").html(x.ToEmployee.Name));
+            $tableRow.append($("<td></td>").html(x.Priority.Name));
+
+
+            if (x.Completed)
+            {
+                $tableRow.append($("<td style='color:green'></td>").html("Завершено"));
+            }
+            else
+            {
+                $tableRow.append($("<td style='color:red'></td>").html("В работе"));
+            }
+
+           
+
+            $tableRow.append($("<td></td>").html(x.Description));
+
+            if (x.Completed)
+            {
+                $tableRow.append($("<td align='right'></td>").html("<button type='button' class='btn btn-primary'>Ред.</button>&nbsp;<button type='button' class='btn btn-danger' onclick='removeTask(this)'>Уд.</button>"));
+            }
+            else
+            {
+                $tableRow.append($("<td align='right'></td>").html("<button type='button' class='btn btn-primary'>Ред.</button>&nbsp;<button type='button' class='btn btn-success' onclick='completeTask(this)'>Зав.</button>"));
+            }
+
+
+
+            return $tableRow;
+        }
+
+
+
+        $('#newTask').on('show.bs.modal', function (event) {
+        })
+
+
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('whatever') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('.modal-title').text('New message to ' + recipient)
+            modal.find('.modal-body input').val(recipient)
+        })
+
+
+        $(document).ready(function ()
+        {
+            
+
+            new restClient("/users/logged").GET(function (x)
+            {
+                $("#loggedUser").text(x.Name);
+            });
+
+
+             new restClient("/tasks/priority").GET(function (dataSet)
+            {
+                $.each(dataSet,function(i,x)
+                {
+                    $("#new-task-priority").append($("<option></option>").val(x.Code).text(x.Name));
+                });
+
+
+                $("#filter-PriorityCode").append($("<option></option>").val("").text("-Приоритет-"))
+
+                $.each(dataSet, function (i, x)
+                {
+                    $("#filter-PriorityCode").append($("<option></option>").val(x.Code).text(x.Name));
+                });
+
+            });
+
+
+            new restClient("/users").GET(function (dataSet)
+            {
+
+                $.each(dataSet,function(i,x)
+                {
+                    $("#new-task-employee").append($("<option></option>").val(x.Id).text(x.Name));
+                });
+
+            
+
+            });
+
+
+            new restClient("/tasks").POST({ PageIndex: 0, PageSize: 10 }, function (dataSet)
+            {
+            
+                $.each(dataSet,function(i,x)
+                {
+                    $("#table-view-tasks").append(newTableRow(x));
+                });
+
+            });
+
+
+        });
+
+        </script>
+
+</body>
+
+
+    
+
+
+</html>
+
+

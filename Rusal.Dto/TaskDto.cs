@@ -68,6 +68,9 @@ namespace Rusal.Dto
             ToEmployee      = new UserDto(other.ToEmployee);
             Priority        = new PriorityDto(other.Priority);
 
+            Completed = other.Completed;
+
+
             if(other.ParentTask!=null)
             {
                 ParentTask = new TaskDto(other.ParentTask);

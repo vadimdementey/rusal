@@ -16,20 +16,32 @@ namespace Rusal.Repository.Repositories
         public TaskRepository(RepositoryFactory factory) : base(factory) { }
 
 
+        public IEnumerable<IPriority> GetTaskPriorities()
+        {
+            return Context.Set<PriorityEntity>().OrderBy(x => x.Code).ToArray();
+        }
 
-        public ITask AddNewTask(Guid? parentTaskId, Guid authorId, Guid employeeId,  string name)
+
+
+
+
+
+        public ITask AddNewTask(Guid? parentTaskId, Guid authorId, Guid employeeId, int priorityCode,  string name)
         {
             TaskEntity newTask = CreateNew<TaskEntity>();
 
+            newTask.Id              = Guid.NewGuid(); 
             newTask.ParentTaskId    = parentTaskId;
             newTask.AuthorId        = authorId;
             newTask.EmployeeId      = employeeId;
             newTask.CreatedDateTime = DateTime.Now;
+            newTask.Completed       = false;
+            newTask.PriorityCode    = priorityCode;
             newTask.Name            = name;
 
 
             Context.SaveChanges();
-            return newTask;
+            return GetTask(newTask);
         }
 
 
@@ -37,10 +49,20 @@ namespace Rusal.Repository.Repositories
         {
             return Context.Set<TaskEntity>()
                         .Include("Author")
-                        .Include("EmployeeTo")
+                        .Include("ToEmployee")
+                        .Include("Priority")
                         .AsNoTracking();
 
         }
+
+
+        private ITask GetTask(ITask task)
+        {
+            return SetOfTask().FirstOrDefault(x => x.Id == task.Id) as ITask ?? task;
+
+        }
+
+
 
 
         public ITask GetTask(Guid taskId)
@@ -50,6 +72,7 @@ namespace Rusal.Repository.Repositories
 
         public IPage<ITask> GetTasksByFilter(ITaskFilter filter)
         {
+
 
             IQueryable<TaskEntity> tasks = SetOfTask();
 
@@ -106,29 +129,29 @@ namespace Rusal.Repository.Repositories
         public void RemoveTask(Guid taskId)
         {
 
-            var taskSet     = Context.Set<TaskEntity>().AsNoTracking();
+            var taskSet     = Context.Set<TaskEntity>();
 
-            TaskEntity task = taskSet.FirstOrDefault(x => x.Id == taskId);
+            TaskEntity task = taskSet.FirstOrDefault(x => x.Id == taskId && x.Completed);
 
 
-            if (task == null || taskSet.Any(x => x.ParentTaskId == taskId))
+            if (task == null ||  taskSet.Any(x => x.ParentTaskId == taskId))
             {
                 return;
             }
 
 
-            Context.Set<TaskEntity>().Remove(task);
+            taskSet.Remove(task);
             Context.SaveChanges();
 
         }
 
-        public void UpdateTask(ITask task)
+        public ITask UpdateTask(ITask task)
         {
             TaskEntity taskEntity = Context.Set<TaskEntity>().FirstOrDefault(x => x.Id == task.Id);
 
             if (taskEntity == null)
             {
-                return;
+                return task;
             }
 
             if (task.Name != taskEntity.Name)
@@ -148,9 +171,24 @@ namespace Rusal.Repository.Repositories
             }
 
             Context.SaveChanges();
+            return GetTask(task);
 
         }
 
-      
+        public ITask SetTaskComplete(Guid taskId)
+        {
+            TaskEntity task = Context.Set<TaskEntity>().FirstOrDefault(x => x.Id == taskId && !x.Completed);
+
+            if (task == null)
+            {
+                return null;
+            }
+
+            task.Completed = true;
+            Context.SaveChanges();
+
+            return GetTask(task);
+
+        }
     }
 }

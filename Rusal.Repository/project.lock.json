@@ -1,0 +1,133 @@
+{
+  "locked": false,
+  "version": 2,
+  "targets": {
+    "DNX,Version=v4.5.1": {
+      "EntityFramework/6.1.2": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.ComponentModel.DataAnnotations"
+        ],
+        "compile": {
+          "lib/net45/EntityFramework.dll": {},
+          "lib/net45/EntityFramework.SqlServer.dll": {}
+        },
+        "runtime": {
+          "lib/net45/EntityFramework.dll": {},
+          "lib/net45/EntityFramework.SqlServer.dll": {}
+        }
+      },
+      "Rusal.Entities/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1",
+        "dependencies": {
+          "Rusal.Interfaces": "1.0.0"
+        }
+      },
+      "Rusal.Interfaces/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1"
+      }
+    },
+    "DNX,Version=v4.5.1/win7-x86": {
+      "EntityFramework/6.1.2": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.ComponentModel.DataAnnotations"
+        ],
+        "compile": {
+          "lib/net45/EntityFramework.dll": {},
+          "lib/net45/EntityFramework.SqlServer.dll": {}
+        },
+        "runtime": {
+          "lib/net45/EntityFramework.dll": {},
+          "lib/net45/EntityFramework.SqlServer.dll": {}
+        }
+      },
+      "Rusal.Entities/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1",
+        "dependencies": {
+          "Rusal.Interfaces": "1.0.0"
+        }
+      },
+      "Rusal.Interfaces/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1"
+      }
+    },
+    "DNX,Version=v4.5.1/win7-x64": {
+      "EntityFramework/6.1.2": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.ComponentModel.DataAnnotations"
+        ],
+        "compile": {
+          "lib/net45/EntityFramework.dll": {},
+          "lib/net45/EntityFramework.SqlServer.dll": {}
+        },
+        "runtime": {
+          "lib/net45/EntityFramework.dll": {},
+          "lib/net45/EntityFramework.SqlServer.dll": {}
+        }
+      },
+      "Rusal.Entities/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1",
+        "dependencies": {
+          "Rusal.Interfaces": "1.0.0"
+        }
+      },
+      "Rusal.Interfaces/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1"
+      }
+    }
+  },
+  "libraries": {
+    "Rusal.Entities/1.0.0": {
+      "type": "project",
+      "path": "../Rusal.Entities/project.json"
+    },
+    "Rusal.Interfaces/1.0.0": {
+      "type": "project",
+      "path": "../Rusal.Interfaces/project.json"
+    },
+    "EntityFramework/6.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "tMYDJsgf19mFkwu1Dp3e681IggYcnuLJrj+OoQtYJ7L8lOD0OprBRyLy9sTTY4leJ2216HU3yFQucEPPKd1BGw==",
+      "files": [
+        "content/App.config.transform",
+        "content/Web.config.transform",
+        "EntityFramework.6.1.2.nupkg",
+        "EntityFramework.6.1.2.nupkg.sha512",
+        "EntityFramework.nuspec",
+        "lib/net40/EntityFramework.dll",
+        "lib/net40/EntityFramework.SqlServer.dll",
+        "lib/net40/EntityFramework.SqlServer.xml",
+        "lib/net40/EntityFramework.xml",
+        "lib/net45/EntityFramework.dll",
+        "lib/net45/EntityFramework.SqlServer.dll",
+        "lib/net45/EntityFramework.SqlServer.xml",
+        "lib/net45/EntityFramework.xml",
+        "tools/about_EntityFramework.help.txt",
+        "tools/EntityFramework.PowerShell.dll",
+        "tools/EntityFramework.PowerShell.Utility.dll",
+        "tools/EntityFramework.psd1",
+        "tools/EntityFramework.psm1",
+        "tools/init.ps1",
+        "tools/install.ps1",
+        "tools/migrate.exe"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "": [
+      "EntityFramework >= 6.1.2",
+      "Rusal.Entities >= 1.0.0-*",
+      "Rusal.Interfaces >= 1.0.0-*"
+    ],
+    "DNX,Version=v4.5.1": []
+  }
+}

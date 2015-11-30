@@ -23,6 +23,12 @@ namespace WebApp.Controllers
         }
 
 
+        [HttpGet("priority")]
+        public PriorityDto[] GetTaskPriorities()
+        {
+            return repositoryContext.GetTaskPriorities().Select(x => new PriorityDto(x)).ToArray();
+        } 
+
         [HttpGet("{id}")]
         public TaskDto GetTask(Guid id)
         {
@@ -49,13 +55,19 @@ namespace WebApp.Controllers
         [HttpPut("new")]
         public TaskDto AddNewTask([FromBody]NewTaskDto task)
         {
-            return new TaskDto(repositoryContext.AddNewTask(task.Task, userContext.Sid, task.Employee, task.Name));
+            return new TaskDto(repositoryContext.AddNewTask(task.Task, userContext.Sid, task.Employee,task.Priority, task.Name));
+        }
+
+        [HttpPut("complete/{id}")]
+        public TaskDto SetTaskComplete(Guid id)
+        {
+            return new TaskDto(repositoryContext.SetTaskComplete(id));
         }
 
         [HttpPut]
-        public void UpdateTask([FromBody]TaskDto task)
+        public TaskDto UpdateTask([FromBody]TaskDto task)
         {
-            repositoryContext.UpdateTask(task);
+            return new TaskDto(repositoryContext.UpdateTask(task));
         }
 
         [HttpDelete("{id}")]

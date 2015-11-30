@@ -16,6 +16,8 @@ namespace Rusal.Repository
         {
             var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
             Database.SetInitializer<DbContext>(null);
+            Database.SetInitializer<RepositoryContext>(null);
+
         }
 
 
@@ -39,8 +41,13 @@ namespace Rusal.Repository
                 return (T)(object)new Repositories.UserRepository(this);
             }
 
+            if (typeof(T) == typeof(ITaskRepository))
+            {
+                return (T)(object)new Repositories.TaskRepository(this);
+            }
 
-            throw new NotImplementedException();
+            throw new NotSupportedException();
+
         }
     }
 }
