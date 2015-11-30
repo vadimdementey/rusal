@@ -12,7 +12,7 @@ namespace Rusal.Interfaces.Repository
 
         ITask GetTask(Guid taskId);
         ITask GetTaskWithChilds(Guid taskId);
-        IEnumerable<ITask> GetTasks(Guid employeeId, int maxCount);
+        IEnumerable<ITask> GetToDoTasks(Guid employeeId, int maxCount);
         IPage<ITask> GetTasksByFilter(ITaskFilter filter);
         ITask AddNewTask(Guid? parentTask , Guid authorId,  Guid employeeId, int priorityCode, string name);
         ITask UpdateTask(ITask task);

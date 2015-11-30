@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace Rusal.Dto.Filtration
 {
-    public class PageDto<TDto,TInterface> : IPage<TDto>
+    public class PageDto<TDto,TInterface> 
     {
         public TDto[] DataSet { get; set; }
 
@@ -27,14 +27,5 @@ namespace Rusal.Dto.Filtration
         
         public int PageSize { get; set; }
        
-        public IEnumerator<TDto> GetEnumerator()
-        {
-            return (DataSet as IEnumerable<TDto>).GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
     }
 }

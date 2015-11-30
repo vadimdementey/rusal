@@ -36,10 +36,10 @@ namespace WebApp.Controllers
         }
 
 
-        [HttpGet("my")]
-        public TaskDto[] GetMyTasks()
+        [HttpGet("todo")]
+        public TaskDto[] GetToDoTasks()
         {
-            return repositoryContext.GetTasks(userContext.Sid, 10)
+            return repositoryContext.GetToDoTasks(userContext.Sid, 10)
                                  .Select(x => new TaskDto(x))
                                  .ToArray();
         }

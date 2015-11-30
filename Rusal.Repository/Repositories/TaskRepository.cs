@@ -74,7 +74,7 @@ namespace Rusal.Repository.Repositories
         {
 
 
-            IQueryable<TaskEntity> tasks = SetOfTask();
+            IQueryable<TaskEntity> tasks = SetOfTask().OrderByDescending(x=>x.CreatedDateTime);
 
 
             if (filter.PriorityCode.HasValue)
@@ -102,9 +102,13 @@ namespace Rusal.Repository.Repositories
             return new PageResult<ITask>(filter.PageIndex, filter.PageSize).ExecuteWith(tasks);
         }
 
-        public IEnumerable<ITask> GetTasks(Guid employeeId, int maxCount)
+        public IEnumerable<ITask> GetToDoTasks(Guid employeeId, int maxCount)
         {
-            return SetOfTask().Where(x => x.EmployeeId == employeeId).Take(maxCount).ToArray();
+            return SetOfTask().Where(x => x.EmployeeId == employeeId && !x.Completed)
+                              .OrderByDescending(x=>x.PriorityCode)
+                              .OrderByDescending(x=>x.CreatedDateTime)
+                              .Take(maxCount)
+                              .ToArray();
         }
 
         public ITask GetTaskWithChilds(Guid taskId)
@@ -159,15 +163,16 @@ namespace Rusal.Repository.Repositories
                 taskEntity.Name = task.Name;
             }
 
-
-            if (task.Completed != taskEntity.Completed)
+            if (task.Priority.Code != taskEntity.PriorityCode)
             {
-                taskEntity.Completed = task.Completed;
+                taskEntity.PriorityCode = task.Priority.Code;
             }
 
+
+           
             if (task.Description != taskEntity.Description)
             {
-                taskEntity.Name = task.Name;
+                taskEntity.Description = task.Description;
             }
 
             Context.SaveChanges();

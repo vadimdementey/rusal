@@ -15,7 +15,7 @@ namespace Rusal.Repository
        
         public int Pages { get; private set; }
 
-        public int PageSize { get;  }
+        public int PageSize { get; private set; }
 
 
         internal PageResult(int pageIndex, int pageSize)
@@ -38,11 +38,25 @@ namespace Rusal.Repository
 
         public IPage<TInterface> ExecuteWith<TEntity>(IQueryable<TEntity> query) where TEntity : TInterface
         {
-            Pages = query.Count() / PageSize;
+
+            int total = query.Count();
+
+            if (PageSize < 1)
+            {
+                PageSize = 1;
+            }
+
+            Pages =  total/ PageSize;
+
+            if ((total % PageSize) > 0)
+            {
+                ++Pages;
+            }
+
 
             if (PageIndex > 0)
             {
-                query = query.Take(PageIndex * PageSize);
+                query = query.Skip(PageIndex * PageSize);
             }
 
             dataSet = query

@@ -35,19 +35,23 @@ namespace Rusal.Repository
 
         public T CreateRepository<T>()
         {
+            return (T)CreateInstance(typeof(T));
+        }
 
-            if (typeof(T) == typeof(IUserRepository))
+        public object CreateInstance(Type type)
+        {
+
+            if (type == typeof(IUserRepository))
             {
-                return (T)(object)new Repositories.UserRepository(this);
+                return new Repositories.UserRepository(this);
             }
 
-            if (typeof(T) == typeof(ITaskRepository))
+            if (type == typeof(ITaskRepository))
             {
-                return (T)(object)new Repositories.TaskRepository(this);
+                return new Repositories.TaskRepository(this);
             }
 
-            throw new NotSupportedException();
-
+            throw new NotImplementedException();
         }
     }
 }

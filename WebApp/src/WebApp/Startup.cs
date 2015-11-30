@@ -62,6 +62,11 @@ namespace WebApp
             app.UseMvc();
             // Add the following route for porting Web API 2 controllers.
             // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
+
+            app.Run(async (context) =>
+            {
+                await Task.Run(() => context.Response.Redirect("index.html"));
+            });
         }
     }
 }

@@ -7,6 +7,8 @@ namespace Rusal.Interfaces.Repository
 {
     public interface IRepositoryFactory
     {
+        object CreateInstance(Type type);
+
         T CreateRepository<T>();
     }
 }
