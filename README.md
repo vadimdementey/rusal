@@ -1,3 +1,3 @@
 # Архитектура web-приложения
 
-<img border="0" src="architecture.jpg">
+<img border="0" src="architecture.gif">
